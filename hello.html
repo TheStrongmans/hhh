@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+
+    </div>
+    
+
+    <script src="js/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            template: `<h1>{{message}}</h1><div v-for="(book,index) in list" :key="index">{{book}}</div>` + 
+            `<div>功德 {{gongde}}&nbsp;<button @click='but()'>敲木鱼</button></div>`,
+            data() {
+                let abc = 'hhh';
+                return {
+                    message: abc,
+                    list: [
+                        '《算法进阶指南》',
+                        '《Java从入门到入土》'
+                    ],
+                    gongde: 0,
+                }
+            },
+            methods: {
+                but() {
+                    this.gongde ++;
+                    // alert('功德+1');
+                }
+            }
+        });
+        app.mount('div');
+    </script>
+</body>
+</html>
