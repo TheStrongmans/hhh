@@ -651,6 +651,8 @@
             <div><button>a</button>:左</div>
             <div><button>d</button>:右</div>
             <div><button>空格</button>结束游戏</div>
+            <hr>
+            <div><h2>积分:{{fenzhi}}</h2></div>
         </div>
 
         <div class="lu">
@@ -731,7 +733,7 @@
                         out: 'img/2out.webp',
                     },
                 ]
-                
+                let fenzhi = Vue.ref(0);
                 
 
                 const updateState = (s) => { 
@@ -894,6 +896,8 @@
                         zhangais:nums,
                         map:arr
                     };  
+                    fenzhi.value += 10;
+
                 }
 
                 var creaZhangaiObj = setInterval(function() {
@@ -928,7 +932,6 @@
                 const panduanOutb = () => {
                     if(heziState.value === 'a') {
                         if((me === 0 || me === 1) && zhangaiarr.value[2].zhangais[0]){
-                            console.log('baa');
                             jieshu();
                         } else if((me === 0 || me === 2) && zhangaiarr.value[2].zhangais[1]) {
                             jieshu();
@@ -983,7 +986,8 @@
                     zhangaiarr,
                     imgs,
                     imgsIndex,
-                    ifOut
+                    ifOut,
+                    fenzhi
                 }
             }
          })
