@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" href="https://oneday-1314070170.cos.ap-shanghai.myqcloud.com/oneday/user/photo/20451668235505842.png">
+    <title>一个伟大的史诗级跑酷游戏</title>
     <style>
         body {
             position: relative;
@@ -693,6 +694,10 @@
     <script>
          const app = Vue.createApp({
             setup() {
+                if(window.location.href.split('index.html?id=')[1] === undefined) {
+                    location.href = window.location.href.split('index.html')[0] + 'xuanze.html';
+                }
+                let imgsIndex = parseInt(window.location.href.split('?id=')[1]);
                 let ifOut = Vue.ref(false);
                 let state = Vue.ref();
                 let stateState = true;
@@ -726,7 +731,7 @@
                         out: 'img/2out.webp',
                     },
                 ]
-                let imgsIndex = parseInt(window.location.href.split('?id=')[1]);
+                
                 
 
                 const updateState = (s) => { 
@@ -826,6 +831,7 @@
                     for(var i = 0; i< qc; i ++) {
                         clearInterval(i);
                     }
+                    
                 }
 
                 const jieshu = () => {
@@ -895,23 +901,34 @@
                 },2000);
 
                 const panduanOuta = () => {
-                    console.log(zhangaiarr.value[1]);
-                    if(heziState.value === 'a') {
-                        if((me === 0 || me === 1) && zhangaiarr.value[1].zhangais[0]){
-                            console.log('a上');
-                        } else if((me === 0 || me === 2) && zhangaiarr.value[1].zhangais[1]) {
-                            console.log('a下');
-                        }
-                    } else if(heziState.value === 'b') {
-                        console.log(2);
-                    } else if(heziState.value === 'c') {
-                        console.log(3);
-                    }
+                    // if(heziState.value === 'a') {
+                    //     console.log(zhangaiarr.value[1])
+                    //     if((me === 0 || me === 1) && zhangaiarr.value[1].zhangais[0]){
+                            
+                    //         console.log('aaa');
+                    //         jieshu();
+                    //     } else if((me === 0 || me === 2) && zhangaiarr.value[1].zhangais[1]) {
+                    //         jieshu();
+                    //         console.log('aab');
+                    //     }
+                    // } else if(heziState.value === 'b') {
+                    //     if((me === 0 || me === 1) && zhangaiarr.value[1].zhangais[2]){
+                    //         jieshu();
+                    //     } else if((me === 0 || me === 2) && zhangaiarr.value[1].zhangais[3]) {
+                    //         jieshu();
+                    //     }
+                    // } else if(heziState.value === 'c') {
+                    //     if((me === 0 || me === 1) && zhangaiarr.value[1].zhangais[4]){
+                    //         jieshu();
+                    //     } else if((me === 0 || me === 2) && zhangaiarr.value[1].zhangais[5]) {
+                    //         jieshu();
+                    //     }
+                    // }
                 }
                 const panduanOutb = () => {
-                    console.log(zhangaiarr.value[1]);
                     if(heziState.value === 'a') {
                         if((me === 0 || me === 1) && zhangaiarr.value[2].zhangais[0]){
+                            console.log('baa');
                             jieshu();
                         } else if((me === 0 || me === 2) && zhangaiarr.value[2].zhangais[1]) {
                             jieshu();
