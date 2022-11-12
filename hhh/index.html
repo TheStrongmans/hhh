@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: relative;
+        }
+        .card {
+            position: absolute;
+            background-color: #eee;
+            width: 1100px;
+            height: 700px;
+            margin: 0 auto;
+            overflow: hidden;
+            left: 50%;
+            transform: translate(-50%,0);
+        }
+        .hezi {
+            width: 100px;
+            height: 200px;
+            position: absolute;
+            left: 500px;
+            bottom: 50px;
+            z-index: 5;
+        }
+        .hezi>div {
+            position:absolute;
+            opacity : 0.5;
+        }
+        .a {
+            height: 200px;
+            width: 100px;
+            background-color: pink;
+            left: 0;
+            bottom: 0;
+        }
+        .b {
+            width: 100px;height: 20px;transform: skew(-20deg);
+            bottom:200px;left: 4px;
+            background-color: rgb(209, 192, 255);
+        }
+        .c {
+            height: 200px;
+            width: 100px;
+            left: 8px;
+            bottom: 20px;
+            background-color: rgb(200, 85, 104);
+        }
+        .d {
+            width: 100px;height: 20px;transform: skew(-20deg);
+            bottom: 0;left: 4px;
+            background-color: rgb(61, 98, 87);
+        }
+        .e {
+            height: 200px;
+            width: 8px;
+            transform: skewY(-70deg);
+            background-color: rgb(126, 153, 29);
+            bottom: 10px;
+        }
+        .f {
+            height: 200px;
+            width: 8px;
+            transform: skewY(-70deg);
+            background-color: rgb(208, 96, 10);
+            bottom: 10px;
+            right: -8px;
+        }
+        .a-huxi{
+            animation:huxi-a 1s infinite;
+        }
+        @keyframes huxi-a {
+            0% {
+                top:0;
+                left: 0;
+            }
+            50% {
+                top:2px;
+                left: -2px;
+            }
+            100% {
+                top:0;
+                left: 0;
+            }
+        }
+        .b-huxi{
+            animation:huxi-b 1s infinite;
+        }
+        @keyframes huxi-b {
+            0% {
+                top:-20px;
+                left: 4px;
+            }
+            50% {
+                top:-24px;
+                left: 4px;
+            }
+            100% {
+                top:-20px;
+                left: 4px;
+            }
+        }
+        .c-huxi{
+            animation:huxi-c 1s infinite;
+        }
+        @keyframes huxi-c {
+            0% {
+                top:-20px;
+                left:8px;
+            }
+            50% {
+                top:-20px;
+                left: 8px;
+            }
+            100% {
+                top:-20px;
+                left:8px;
+            }
+        }
+        .d-huxi{
+            animation:huxi-d 1s infinite;
+        }
+        @keyframes huxi-d {
+            0% {
+                bottom:0px;
+                left: 4px;
+            }
+            50% {
+                bottom:-4px;
+                left: 4px;
+            }
+            100% {
+                bottom:0px;
+                left: 4px;
+            }
+        }
+        .e-huxi{
+            animation:huxi-e 1s infinite;
+        }
+        @keyframes huxi-e {
+            0% {
+                top:-10px;
+                left: 0px;
+            }
+            50% {
+                top:-10px;
+                left:-4px;
+            }
+            100% {
+                top:-10px;
+                left: 0;
+            }
+        }
+        .f-huxi{
+            animation:huxi-f 1s infinite;
+        }
+        @keyframes huxi-f {
+            0% {
+                top:-10px;
+                right: -8px;
+            }
+            50% {
+                top:-10px;
+                right: -12px;
+            }
+            100% {
+                top:-10px;
+                right: -8px;
+            }
+        }
+        .a-tiao{
+            animation:tiao-a 1.2s;
+        }
+        @keyframes tiao-a {
+            0% {
+                height: 200px;
+                top:0;
+                left: 0;
+            }
+            50% {
+                height: 100px;
+                top:-42px;
+                left: -8px;
+            }
+            100% {
+                height: 200px;
+                top:0;
+                left: 0;
+            }
+        }
+        .b-tiao{
+            animation:tiao-b 1.2s;
+        }
+        @keyframes tiao-b {
+            0% {
+                top:-20px;
+                left: 4px;
+            }
+            50% {
+                top:-82px;
+                left: 4px;
+            }
+            100% {
+                top:-20px;
+                left: 4px;
+            }
+        }
+        .c-tiao{
+            animation:tiao-c 1.2s;
+        }
+        @keyframes tiao-c {
+            0% {
+                height: 200px;
+                top:-20px;
+                left:8px;
+            }
+            50% {
+                height: 100px;
+                top:-70px;
+                left: 8px;
+            }
+            100% {
+                height: 200px;
+                top:-20px;
+                left:8px;
+            }
+        }
+        .d-tiao{
+            animation:tiao-d 1.2s;
+        }
+        @keyframes tiao-d {
+            0% {
+                bottom:0px;
+                left: 4px;
+            }
+            50% {
+                bottom:138px;
+                left: 4px;
+            }
+            100% {
+                bottom:0px;
+                left: 4px;
+            }
+        }
+        .e-tiao{
+            animation:tiao-e 1.2s;
+        }
+        @keyframes tiao-e {
+            0% {
+                height: 200px;
+                top:-10px;
+                left: 0px;
+            }
+            50% {
+                height: 100px;
+                top:-60px;
+                left:-12px;
+            }
+            100% {
+                height: 200px;
+                top:-10px;
+                left: 0;
+            }
+        }
+        .f-tiao{
+            animation:tiao-f 1.2s;
+        }
+        @keyframes tiao-f {
+            0% {
+                height: 200px;
+                top:-10px;
+                right: -8px;
+            }
+            50% {
+                height: 100px;
+                top:-60px;
+                right: -16px;
+            }
+            100% {
+                height: 200px;
+                top:-10px;
+                right: -8px;
+            }
+        }
+        .a-dun{
+            height: 100px;
+            /* reverse */
+            animation:dun-a 0.3s;
+        }
+        .a-dun-huifu{
+            /* reverse */
+            animation:dun-a-huifu 0.3s; 
+        }
+        @keyframes dun-a {
+            0% {
+                height: 200px;
+            }
+            100% {
+                height: 100px;
+            }
+        }
+        @keyframes dun-a-huifu {
+            0% {
+                height: 100px;
+            }
+            100% {
+                height: 200px;
+            }
+        }
+        .b-dun{
+            top: 80px;
+            animation:dun-b 0.3s;
+        }
+        .b-dun-huifu{
+            animation:dun-b-huifu 0.3s ;
+        }
+        @keyframes dun-b {
+            0% {
+                top: -20px;
+            }
+            100% {
+                top: 80px;
+            }
+        }
+        @keyframes dun-b-huifu {
+            0% {
+                top: 80px;
+            }
+            100% {
+                top: -20px;
+            }
+        }
+        .c-dun{
+            height: 100px;
+            animation:dun-a 0.3s;
+        }
+        .d-dun{
+            animation:dun-d 0.3s;
+        }
+        
+        .c-dun-huifu{
+            animation:dun-a-huifu 0.3s;
+        }
+        .d-dun-huifu{
+            animation:dun-d-huifu 0.3s;
+        }
+        @keyframes dun-d {
+            0% {
+                bottom:0px;
+            }
+            100% {
+                bottom:0px;
+            }
+        }
+        @keyframes dun-d-huifu {
+            0% {
+                bottom:0px;
+            }
+            100% {
+                bottom:0px;
+            }
+        }
+        .e-dun{
+            height: 100px;
+            animation:dun-a 0.3s ;
+        }
+        .f-dun{
+            height: 100px;
+            animation:dun-a 0.3s ;
+        }
+        .e-dun-huifu{
+            animation:dun-a-huifu 0.3s;
+        }
+        .f-dun-huifu{
+            animation:dun-a-huifu 0.3s;
+        }
+        .a-hezi {
+            left: 300px;
+            animation:hezi-a 0.3s;
+        }
+        @keyframes hezi-a {
+            0% {
+                left: 500px;
+            }
+            100% {
+                left: 300px;
+            }
+        }
+        .b-hezi-a {
+            left: 500px;
+            animation:hezi-b-a 0.3s;
+        }
+        @keyframes hezi-b-a {
+            0% {
+                left: 300px;
+            }
+            100% {
+                left: 500px;
+            }
+        }
+        .b-hezi-c {
+            left: 500px;
+            animation:hezi-b-c 0.3s;
+        }
+        @keyframes hezi-b-c {
+            0% {
+                left: 700px;
+            }
+            100% {
+                left: 500px;
+            }
+        }
+        .c-hezi {
+            left: 700px;
+            animation:hezi-c 0.3s;
+        }
+        @keyframes hezi-c {
+            0% {
+                left: 500px;
+            }
+            100% {
+                left: 700px;
+            }
+        }
+        .lu {
+            height: 700px;
+            width: 600px;
+            position: absolute;
+            background-color: #555;
+            left: 245px;
+            border-left: 5px solid #fff;
+            border-right: 5px solid #fff;
+        }
+        .lu-xian {
+            margin-top: -130px;
+            animation:xian-lu 0.805s infinite linear;
+        }
+        @keyframes xian-lu {
+            0% {
+                margin-top: -130px;
+            }
+            100% {
+                margin-top: 10px;
+            }
+        }
+        .lu- {
+            margin: 0 auto;
+            margin-bottom: 40px;
+            width: 200px;
+            height: 100px;
+            border-left: 5px solid #fff;
+            border-right: 5px solid #fff;
+        }
+        .zhangai {
+            height: 700px;
+            width: 600px;
+            position: absolute;
+            left: 250px;
+        }
+        .zhangai-top {
+            position: absolute;
+            width: 170px;
+            height: 20px;
+            border-radius: 50%;
+            /* bottom: -340px; */
+            background-color: #888;
+            box-shadow: 0 0 10px 10px #888;
+            left: 15px;
+            z-index: auto;
+        }
+        .zhangai-top-a {
+            width: 170px;
+            height: 100px;
+            background-color: #eee;
+            position: absolute;
+            bottom: 120px;
+        }
+        .zhangai-top-b {
+            position: absolute;
+            width: 170px;
+            height: 20px;
+            transform: skew(-20deg);
+            bottom:220px;
+            left: 4px;
+            background-color: #ccc;
+        }
+        .zhangai-top-c {
+            position: absolute;
+            height: 100px;
+            width: 8px;
+            transform: skewY(-70deg);
+            background-color: #ddd;
+            bottom: 130px;
+            right: -8px;
+        }
+        .donghua-zhangai {
+            margin-top:-230px;
+            animation:zhangai 2s  infinite linear;
+        }
+        @keyframes zhangai {
+            0% {
+                margin-top: -230px;
+            }
+            100% {
+                margin-top: 130px;
+            }
+        }
+        .zhangai-bot {
+            left: 415px;
+        }
+        .zhangai-bot-a {
+            width: 170px;
+            height: 100px;
+            background-color: #eee;
+            position: absolute;
+            bottom: 0;
+        }
+        .zhangai-bot-b {
+            position: absolute;
+            width: 170px;
+            height: 20px;
+            transform: skew(-20deg);
+            bottom:100px;
+            left: 4px;
+            background-color: #ccc;
+        }
+        .zhangai-bot-c {
+            position: absolute;
+            height: 100px;
+            width: 8px;
+            transform: skewY(-70deg);
+            background-color: #ddd;
+            bottom: 10px;
+            right: -8px;
+        }
+        .lu .hezi {
+            left: 250px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #888;
+            box-shadow: 0 0 10px 10px #888;
+            z-index: 0;
+        }
+        .lu .a-hezi {
+            left: 50px;
+            animation:lu-hezi-a 0.3s;
+        }
+        @keyframes lu-hezi-a {
+            0% {
+                left: 250px;
+            }
+            100% {
+                left: 50px;
+            }
+        }
+        .lu .c-hezi {
+            left: 450px;
+            animation:lu-c-hezi 0.3s;
+        }
+        @keyframes lu-c-hezi {
+            0% {
+                left: 250px;
+            }
+            100% {
+                left: 450px;
+            }
+        }
+        .lu .b-hezi-c {
+            left: 250px;
+            animation:lu-b-hezi-c 0.3s;
+        }
+        @keyframes lu-b-hezi-c {
+            0% {
+                left: 450px;
+            }
+            100% {
+                left: 250px;
+            }
+        }
+        .lu .b-hezi-a {
+            left: 50px;
+            animation:lu-b-hezi-a 0.3s;
+        }
+        @keyframes lu-b-hezi-a {
+            0% {
+                left: 50px;
+            }
+            100% {
+                left: 250px;
+            }
+        }
+        .zhangaiheng {
+            margin-top: 140px;
+            height: 220px;
+            width: 100px;
+        }
+        .hezi>div{
+            z-index: 1;
+        }
+        .shangzindex>div {
+            z-index: 5;
+        }
+        div{
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .card-out h1{
+            color: #fff;
+        }
+        .card-out a{
+            color: rgb(0, 208, 255);
+        }
+        .card-out {
+            z-index: 99;
+            background-color: rgba(0, 0, 0, 0.6);
+            text-align: center;
+            animation:outshow 1s;
+        }
+        @keyframes outshow {
+            0% {
+                background-color: rgba(0, 0, 0, 0);
+            }
+            100% {
+                background-color: rgba(0, 0, 0, 0.6);
+            }
+        }
+        [v-cloak]{display: none;}
+        .shuoming {
+            position: absolute;
+            left: 40px;
+            top:40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+
+        <div class="shuoming">
+            <div>游戏说明：</div>
+            <div>控制角色躲避障碍物</div>
+            <hr>
+            <div>操作说明：</div>
+            <div><button>w</button>:跳</div>
+            <div><button>s</button>:蹲</div>
+            <div><button>a</button>:左</div>
+            <div><button>d</button>:右</div>
+            <div><button>空格</button>结束游戏</div>
+        </div>
+
+        <div class="lu">
+            <div class="lu-xian">
+                <div class="lu-"></div>
+                <div class="lu-"></div>
+                <div class="lu-"></div>
+                <div class="lu-"></div>
+                <div class="lu-"></div>
+                <div class="lu-"></div>
+            </div>
+            <div :class="{'hezi':true,'a-hezi':heziState === 'a','b-hezi-a':heziState === 'b-a','b-hezi-c':heziState === 'b-c','c-hezi':heziState === 'c'}"></div>
+            
+        </div>
+        
+        <div :class="{'hezi':true,'a-hezi':heziState === 'a','b-hezi-a':heziState === 'b-a','b-hezi-c':heziState === 'b-c','c-hezi':heziState === 'c'}">
+            <div :class="{'c':true,'c-huxi':state === 'huxi','c-tiao':state === 'tiao','c-dun':state === 'dun','c-dun-huifu':state === 'dun-huifu'}">{{state}}</div>
+            <div :class="{'d':true,'d-huxi':state === 'huxi','d-tiao':state === 'tiao','d-dun':state === 'dun','d-dun-huifu':state === 'dun-huifu'}"></div>
+            <div :class="{'e':true,'e-huxi':state === 'huxi','e-tiao':state === 'tiao','e-dun':state === 'dun','e-dun-huifu':state === 'dun-huifu'}"></div>
+            <div :style="{'background-image': 'url(' + (ifOut ? imgs[imgsIndex].out : imgs[imgsIndex].a) + ')'}" :class="{'a':true,'a-huxi':state === 'huxi','a-tiao':state === 'tiao','a-dun':state === 'dun','a-dun-huifu':state === 'dun-huifu'}">
+            </div>
+            <div :class="{'b':true,'b-huxi':state === 'huxi','b-tiao':state === 'tiao','b-dun':state === 'dun','b-dun-huifu':state === 'dun-huifu'}"></div>
+            <div :class="{'f':true,'f-huxi':state === 'huxi','f-tiao':state === 'tiao','f-dun':state === 'dun','f-dun-huifu':state === 'dun-huifu'}"></div>
+        </div>
+        <div class="zhangai donghua-zhangai" >
+            <div v-cloak class="zhangaiheng" v-for="(zhangaix,j) in zhangaiarr" :key="j">
+                <div v-cloak v-for="zhangaic in zhangaix.map" :key="zhangaic.id"  :class="{'zhangai-top':true,'zhangai-bot':!zhangaic.tort,'shangzindex':zhangaic.xianshiSetate}" :style="'left:' + zhangaic.leftNum + 'px'">
+                    <div :style="{'background-image': 'url(' + (zhangaic.tort ? imgs[imgsIndex].a2 : imgs[imgsIndex].a1) + ')'}" v-cloak :class="!zhangaic.tort ? 'zhangai-top-a' : 'zhangai-bot-a'"></div>
+                    <div v-cloak :class="!zhangaic.tort ? 'zhangai-top-b' : 'zhangai-bot-b'"></div>
+                    <div v-cloak :class="!zhangaic.tort ? 'zhangai-top-c' : 'zhangai-bot-c'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-if="ifOut" class="card card-out">
+        <h1>结束</h1>
+        <a href="xuanze.html">重新选择</a>&nbsp;&nbsp;&nbsp;&nbsp;<a :href="'index.html?id=' + imgsIndex">重新开始</a>
+    </div>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script>
+         const app = Vue.createApp({
+            setup() {
+                let ifOut = Vue.ref(false);
+                let state = Vue.ref();
+                let stateState = true;
+                let heziState = Vue.ref();
+                let heziStateState = true;
+                let zhangais = [0, 0, 0, 0, 0, 0];
+                let me = 0;
+                let maxZhangaiNum = 4;
+                let zhangaiCount = 0;
+                let zhangaiarr = Vue.ref([]);
+                zhangaiarr.value = [
+                    [
+                    ],
+                    [
+                    ],
+                    [
+                    ],
+                ]
+                let imgs = Vue.ref();
+                imgs.value = [
+                    {
+                        a: 'img/1.webp',
+                        a1: 'img/篮球框.webp',
+                        a2: 'img/篮球.webp',
+                        out: 'img/hh3.png',
+                    },
+                    {
+                        a: 'img/2.gif',
+                        a1: 'img/2-1.webp',
+                        a2: 'img/2-2.webp',
+                        out: 'img/2out.webp',
+                    },
+                ]
+                let imgsIndex = parseInt(window.location.href.split('?id=')[1]);
+                
+
+                const updateState = (s) => { 
+                    state.value = s;
+                }
+                updateState('huxi');
+                const updateHeziState = (s) => {
+                    heziState.value = s;
+                }
+                updateHeziState('b');
+
+                const an_ad = (s) => {
+                    heziStateState = false;
+                    if(s === 'a'){
+                        if(heziState.value === 'b') {
+                            updateHeziState('a');
+                            setTimeout(function() {
+                                heziStateState = true;
+                            }, 300);
+                        } else if(heziState.value === 'c') {
+                            updateHeziState('b-c');
+                            setTimeout(function() {
+                                updateHeziState('b');
+                                heziStateState = true;
+                            }, 300);
+                        } else {
+                            heziStateState = true;
+                            
+                        }
+                    } else if(s === 'd'){
+                        if(heziState.value === 'b') {
+                            updateHeziState('c');
+                            setTimeout(function() {
+                                heziStateState = true;
+                            }, 300);
+                        } else if(heziState.value === 'a') {
+                            updateHeziState('b-a');
+                            setTimeout(function() {
+                                updateHeziState('b');
+                                heziStateState = true;
+                            }, 300);
+                        } else {
+                            heziStateState = true;
+                        }
+                    } 
+                }
+
+                const an_ws = (s) =>{
+                    stateState = false;
+                    if(s === 'w') {
+                        if(state.value === 'huxi') {
+                            updateState('tiao');
+                            setTimeout(function() {
+                                updateState('huxi');
+                                stateState = true;
+                            }, 1200);
+                            setTimeout(function() {
+                                me =1;
+                            }, 200);
+                            setTimeout(function() {
+                                me =0;
+                            }, 1000);
+                        } else if(state.value === 'dun'){
+                            updateState('dun-huifu');
+                            setTimeout(function() {
+                                updateState('huxi');
+                                stateState = true;
+                            }, 300);
+                            setTimeout(function() {
+                                me =0;
+                            }, 50);
+                        }
+                    }else if(s === 's'){
+                        if(state.value === 'dun') {
+                            updateState('dun-huifu');
+                            setTimeout(function() {
+                                updateState('huxi');
+                                stateState = true;
+                            }, 300);
+                            setTimeout(function() {
+                                me =0;
+                            }, 50);
+                        } else {
+                            updateState('dun');
+                            setTimeout(function() {
+                                stateState = true;
+                            }, 300);
+                            setTimeout(function() {
+                                me =2;
+                            }, 100);
+                        }
+                    }
+                }
+
+                const qcTime = () => {
+                    var qc = setInterval(function(){},1);
+                    for(var i = 0; i< qc; i ++) {
+                        clearInterval(i);
+                    }
+                }
+
+                const jieshu = () => {
+                    $("*").css('animationPlayState', 'paused');
+                    qcTime();
+                    ifOut.value = true;
+                }   
+
+                // const datab = getCurrentInstance();
+                const an = () => {
+                    // setTimeout(function() {
+                    //     $("*").css('animationPlayState', 'paused');
+                    // }, 2949)
+                    // setTimeout(function() {
+                    //     $("*").css('animationPlayState', 'paused');
+                    // }, 3000)
+                    $(document).keydown(function(event) {
+                        // $("*").css('animationPlayState', 'paused');d
+                        let s = event.key;
+                        if(s === ' ') {
+                            jieshu();
+                        }
+                        if(stateState && (s === 'w' || s === 's')) an_ws(s) ;
+                        if(heziStateState && (s === 'a' || s === 'd')) an_ad(s);
+                    })
+                }
+                an();
+
+
+
+                const creaZhangai = () => {
+                    let num = Math.floor(Math.random() * maxZhangaiNum) ;
+                    var nums = [0, 0, 0, 0, 0, 0];
+                    let arr = [{}];
+                    for(let i = 0; i <= num; ++i) {
+                        let n = Math.floor(Math.random() * 6);
+                        if(nums[n] === 0) {
+                            nums[n] =  1;
+                            let tort = n & 1;
+                            let leftNum = '';
+                            if(n === 0 || n === 1) {
+                                leftNum = 15;
+                            } else if(n === 2 || n === 3) {
+                                leftNum = 215;
+                            } else if(n === 4 || n === 5) {
+                                leftNum = 415;
+                            }
+                            arr[i] = {
+                                    id: ++ zhangaiCount,
+                                    tort,
+                                    leftNum,
+                            }
+                        } else {
+                            --i;
+                        }
+                    }
+                    zhangaiarr.value[2] = zhangaiarr.value[1];
+                    zhangaiarr.value[1] = zhangaiarr.value[0];
+                    zhangaiarr.value[0] = {
+                        zhangais:nums,
+                        map:arr
+                    };  
+                }
+
+                var creaZhangaiObj = setInterval(function() {
+                    creaZhangai()
+                },2000);
+
+                const panduanOuta = () => {
+                    console.log(zhangaiarr.value[1]);
+                    if(heziState.value === 'a') {
+                        if((me === 0 || me === 1) && zhangaiarr.value[1].zhangais[0]){
+                            console.log('a上');
+                        } else if((me === 0 || me === 2) && zhangaiarr.value[1].zhangais[1]) {
+                            console.log('a下');
+                        }
+                    } else if(heziState.value === 'b') {
+                        console.log(2);
+                    } else if(heziState.value === 'c') {
+                        console.log(3);
+                    }
+                }
+                const panduanOutb = () => {
+                    console.log(zhangaiarr.value[1]);
+                    if(heziState.value === 'a') {
+                        if((me === 0 || me === 1) && zhangaiarr.value[2].zhangais[0]){
+                            jieshu();
+                        } else if((me === 0 || me === 2) && zhangaiarr.value[2].zhangais[1]) {
+                            jieshu();
+                        }
+                    } else if(heziState.value === 'b') {
+                        if((me === 0 || me === 1) && zhangaiarr.value[2].zhangais[2]){
+                            jieshu();
+                        } else if((me === 0 || me === 2) && zhangaiarr.value[2].zhangais[3]) {
+                            jieshu();
+                        }
+                    } else if(heziState.value === 'c') {
+                        if((me === 0 || me === 1) && zhangaiarr.value[2].zhangais[4]){
+                            jieshu();
+                        } else if((me === 0 || me === 2) && zhangaiarr.value[2].zhangais[5]) {
+                            jieshu();
+                        }
+                    }
+                }
+
+                const updatexianshiSetate = () => {
+                    for(let i = 0; i < zhangaiarr.value[2].map.length; i++){
+                        zhangaiarr.value[2].map[i].xianshiSetate = true;
+                    }
+                }
+
+                var starPanduanOut = null;
+                const luoji = () => {
+                    starPanduanOut = setInterval(panduanOuta, 5);
+                    setTimeout(function() {
+                        clearInterval(starPanduanOut);
+                        starPanduanOut = setInterval(panduanOutb, 5);
+                    },100)
+                    setTimeout(function() {
+                        clearInterval(starPanduanOut);
+                        updatexianshiSetate();
+                    },200)
+                    setTimeout(function() {
+                        setTimeout(function() {
+                            luoji()
+                        },1900);
+                    },100);
+                }
+
+                setTimeout(function() {
+                    luoji()
+                },5900);
+
+
+                return {
+                    state,
+                    heziState,
+                    zhangaiarr,
+                    imgs,
+                    imgsIndex,
+                    ifOut
+                }
+            }
+         })
+         app.mount('body');
+    </script>
+</body>
+</html>

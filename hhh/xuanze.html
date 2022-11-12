@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+        div {
+            text-align: center;
+        }
+        a {
+            float: left;
+            display: block;
+        }
+        button {
+            
+            padding: 20px;
+            font-size: 24px;
+            color: #fff;
+            background-color:skyblue;
+            border: none;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: rgb(126, 193, 220);
+            
+        }
+        .but1 {
+            margin-right: 20px;
+            animation:tiao1 2s  infinite linear;
+        }
+        .but2 {
+            animation:tiao2 2s  infinite linear;
+        }
+        @keyframes tiao2 {
+            0% {
+                margin-top: 0;
+            }
+            25% {
+                margin-top: 2px;
+            }
+            50% {
+                margin-top: 0;
+            }
+            75% {
+                margin-top: -2px;
+            }
+            100% {
+                margin-top: 0;
+            }
+        }
+        @keyframes tiao1 {
+            0% {
+                margin-top: 0;
+            }
+            25% {
+                margin-top: -2px;
+            }
+            50% {
+                margin-top: 0;
+            }
+            75% {
+                margin-top: 2px;
+            }
+            100% {
+                margin-top: 0;
+            }
+        }
+        .but {
+            width: 200px;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%,0);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>一个伟大的史诗级跑酷游戏</h1>
+        <h3>选择角色</h3>
+        <div class="but"><a href="index.html?id=0" class="but1"><button>i</button></a>&nbsp;<a href="index.html?id=1" class="but2"><button>炊事班</button></a></div>
+    </div>
+</body>
+</html>
