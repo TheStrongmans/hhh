@@ -636,11 +636,39 @@
             left: 40px;
             top:40px;
         }
+        .paihangbang {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 240px;
+        }
+        .paihangbang table{
+            text-align: left; border-collapse: collapse;
+            font-size: 14px;
+        }
+        .paihangbang td {
+            padding: 2px 0 2px 2px;
+            overflow: hidden;
+        }
+        .paihangbang img,.photo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
+    <audio id="music" :src="imgs[imgsIndex].outmp3" autoplay="autoplay" loop="loop" preload="auto" type="audio/mp3"></audio>
+    <!-- <audio :src="imgs[imgsIndex].outmp3" id="music" loop="loop" paused controls="controls" autoplay="autoplay"></audio> -->
+    <!-- <audio id="music"
+        autoplay="autoplay"
+        controls="controls"
+        preload="auto"
+        :src="imgs[imgsIndex].outmp3">
+    </audio> -->
     <div class="card">
-
+        
         <div class="shuoming">
             <div>游戏说明：</div>
             <div>控制角色躲避障碍物</div>
@@ -652,7 +680,26 @@
             <div><button>d</button>:右</div>
             <div><button>空格</button>结束游戏</div>
             <hr>
+            <h3 v-if="iflogin"><img :src="userphoto" class="photo" alt="">{{username}}</h3>
             <div><h2>积分:{{fenzhi}}</h2></div>
+        </div>
+
+        <div class="paihangbang">
+            <h3>排行榜</h3>
+            <table border="1">
+                <tr>
+                    <th style="width:170px">用户</th>
+                    <th style="width:50px">积分</th>
+                    <th style="width:20px">排名</th>
+                </tr>
+                <tr v-for="(paiming,index) in paimings" :key="index">
+                    <td>
+                        <img :src="paiming.photo" alt=""> {{paiming.username}}
+                    </td>
+                    <td>{{paiming.jifen}}</td>
+                    <td>{{index + 1}}</td>
+                </tr>
+            </table>
         </div>
 
         <div class="lu">
@@ -694,8 +741,10 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/vue.js"></script>
     <script>
+        var music = document.getElementById('music');
          const app = Vue.createApp({
             setup() {
+                console.log(music);
                 if(window.location.href.split('index.html?id=')[1] === undefined) {
                     location.href = window.location.href.split('index.html')[0] + 'xuanze.html';
                 }
@@ -725,16 +774,21 @@
                         a1: 'img/篮球框.webp',
                         a2: 'img/篮球.webp',
                         out: 'img/hh3.png',
+                        outmp3: 'mp3/out1.mp3'
                     },
                     {
                         a: 'img/2.gif',
                         a1: 'img/2-1.webp',
                         a2: 'img/2-2.webp',
                         out: 'img/2out.webp',
+                        outmp3: 'mp3/out2.mp3'
                     },
                 ]
                 let fenzhi = Vue.ref(0);
-                
+                let paimings = Vue.ref('');
+                let iflogin = Vue.ref(false);
+                let username = Vue.ref('');
+                let userphoto = Vue.ref('');
 
                 const updateState = (s) => { 
                     state.value = s;
@@ -836,10 +890,64 @@
                     
                 }
 
+                const getpaimings = () => {
+                    $.ajax({
+                        url: 'https://app3558.acapp.acwing.com.cn/a/paoku/get10/',
+                        type: 'get',
+                        success(resp) {
+                            if(resp.error_message === 'success') {
+                                paimings.value = resp.paimings;
+                            }
+                        }
+                    })
+                }
+                getpaimings();
+
+                const getInfo = () => {
+                    $.ajax({
+                        url: "https://app3558.acapp.acwing.com.cn/a/user/account/info/",
+                        type: "get",
+                        headers: {
+                        Authorization: "Bearer " + localStorage.getItem('jwt_token')
+                        },
+                        success(resp) {
+                        if(resp.error_message === 'success' ) {
+                            username.value = resp.username;
+                            userphoto.value = resp.photo;
+                            iflogin.value = true;
+                        } else {
+                            localStorage.removeItem('jwt_token');
+                        }
+                        },
+                        error(resp) {
+                            localStorage.removeItem('jwt_token');
+                        }
+                    });
+                }
+                getInfo();
+
+                const updateJifen = () => {
+                    $.ajax({
+                        url: "https://app3558.acapp.acwing.com.cn/a/paoku/add/",
+                        type: "post",
+                        data: {
+                            jifen: fenzhi.value,
+                        },
+                        headers: {
+                            Authorization: "Bearer " + localStorage.getItem('jwt_token')
+                        },
+                        success(resp) {
+                            if(resp.error_message === 'success' ) {
+                                getpaimings();
+                            } 
+                        }
+                    })
+                }
                 const jieshu = () => {
                     $("*").css('animationPlayState', 'paused');
                     qcTime();
                     ifOut.value = true;
+                    updateJifen();
                 }   
 
                 // const datab = getCurrentInstance();
@@ -851,6 +959,8 @@
                     //     $("*").css('animationPlayState', 'paused');
                     // }, 3000)
                     $(document).keydown(function(event) {
+                        music.paused=false;
+                        music.play(); //没有就播放 
                         // $("*").css('animationPlayState', 'paused');d
                         let s = event.key;
                         if(s === ' ') {
@@ -979,6 +1089,8 @@
                     luoji()
                 },5900);
 
+               
+
 
                 return {
                     state,
@@ -987,11 +1099,16 @@
                     imgs,
                     imgsIndex,
                     ifOut,
-                    fenzhi
+                    fenzhi,
+                    paimings,
+                    iflogin,
+                    username,
+                    userphoto,
                 }
             }
          })
          app.mount('body');
     </script>
+    
 </body>
 </html>
