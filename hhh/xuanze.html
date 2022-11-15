@@ -10,11 +10,11 @@
         div {
             text-align: center;
         }
-        a {
+        .but1,.but1 {
             float: left;
             display: block;
         }
-        button {
+        .but button {
             
             padding: 20px;
             font-size: 24px;
@@ -24,7 +24,7 @@
             font-weight: 600;
             border-radius: 5px;
         }
-        button:hover {
+        .but button:hover {
             background-color: rgb(126, 193, 220);
             
         }
@@ -75,13 +75,186 @@
             left: 50%;
             transform: translate(-50%,0);
         }
+        .yonghumoshi {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+        .paihangbang {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            width: 500px;
+        }
+        .paihangbang table{
+            text-align: left; border-collapse: collapse;
+        }
+        .paihangbang td {
+            padding: 5px 20px 5px 5px;
+        }
+        .paihangbang img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
     <div>
         <h1>一个伟大的史诗级跑酷游戏</h1>
-        <h3>选择角色</h3>
-        <div class="but"><a href="index.html?id=0" class="but1"><button>i</button></a>&nbsp;<a href="index.html?id=1" class="but2"><button>炊事班</button></a></div>
+        <h3>{{iflogin ? username : ''}} 请选择角色</h3>
+        <div class="but"><a href="index.html?id=0" class="but1"><button>i</button class="but"></a>&nbsp;<a href="index.html?id=1" class="but2"><button>炊事班</button></a></div>
     </div>
+    <div class="yonghumoshi">
+        <ul style="text-align:left">
+            <li>游客模式：最后所得分数不会记录排行榜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>用户模式：最后所得分数自动记录排行榜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>没有账号需在<a style="float:none" target="_blank" href="https://app3558.acapp.acwing.com.cn/">https://app3558.acapp.acwing.com.cn</a>注册<br></li>
+        </ul>
+        <div v-if="!iflogin">
+            账号：<input type="text" v-model="username"><br>
+            密码：<input type="password" v-model="password"><br>
+            验证码：<img :src="yanzhengmaurl" alt="" style="height: 30px"><input type="text" v-model="yanzhengma"><br>
+            <span style="font-size:12px;color:red">{{error_message}}</span><button @click="login">登录</button>
+        </div>
+        <h2>当前：{{iflogin ? '用户模式' : '游客模式'}}</h2><a href="#" v-if="iflogin" @click="tuilogin">退出登录</a>
+    </div>
+
+    <div class="paihangbang">
+        <h3>排行榜</h3>
+        <table border="1">
+            <tr>
+                <th style="width:250px">用户</th>
+                <th style="width:50px">积分</th>
+                <th style="width:160px">时间</th>
+                <th style="width:40px">排名</th>
+            </tr>
+            <tr v-for="(paiming,index) in paimings" :key="index">
+                <td>
+                    <img :src="paiming.photo" alt=""> {{paiming.username}}
+                </td>
+                <td>{{paiming.jifen}}</td>
+                <td>{{paiming.time}}</td>
+                <td>{{index + 1}}</td>
+            </tr>
+        </table>
+    </div>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            setup() {
+                let iflogin = Vue.ref(false);
+                let username = Vue.ref('');
+                let password = Vue.ref('');
+                let yanzhengmaurl = Vue.ref('');
+                let yanzhengma = Vue.ref('');
+                let error_message = Vue.ref('');
+                let userphoto = Vue.ref('');
+                let paimings = Vue.ref('');
+                const getInfo = () => {
+                    $.ajax({
+                        url: "https://app3558.acapp.acwing.com.cn/a/user/account/info/",
+                        type: "get",
+                        headers: {
+                        Authorization: "Bearer " + localStorage.getItem('jwt_token')
+                        },
+                        success(resp) {
+                        if(resp.error_message === 'success' ) {
+                            username.value = resp.username;
+                            userphoto.value = resp.photo;
+                            iflogin.value = true;
+                        } else {
+                            alert('出错了');
+                            localStorage.removeItem('jwt_token');
+                        }
+                        },
+                        error(resp) {
+                            alert('出错了');
+                            localStorage.removeItem('jwt_token');
+                        }
+                    });
+                }
+                if(localStorage.getItem('jwt_token') != null) {
+                    getInfo();
+                }
+
+                const get_yanzhengma = () => {
+                    $.ajax({
+                        url: "https://app3558.acapp.acwing.com.cn/a/yanzhengma/",
+                        type: "get",
+                        success(resp) {
+                            if(resp.error_message === 'success') {
+                                yanzhengmaurl.value = resp.yanzhengma;
+                            }
+                        }
+                    })
+                }
+                if(!iflogin.value)get_yanzhengma();
+
+                const login = () => {
+                    error_message.value = "";
+                    $.ajax({
+                        url: "https://app3558.acapp.acwing.com.cn/a/user/account/token/",
+                        type: "post",
+                        data: {
+                            username : username.value,
+                            password: password.value,
+                            yanzhengma: yanzhengma.value
+                        },
+                        success(resp) {
+                            if(resp.error_message === 'success' ) {
+                                localStorage.setItem("jwt_token", resp.token);
+                                iflogin.value = true;
+                            }else {
+                                error_message.value = "验证码错误";
+                                yanzhengmaurl.value = resp.yanzhengma;
+                            }
+                        },
+                        error(resp) {
+                            error_message.value = "用户名或密码错误";
+                        }
+
+                    })
+                }
+
+                const tuilogin = () => {
+                    localStorage.removeItem('jwt_token');
+                    iflogin.value = false;
+                    username.value = '';
+                    userphoto.value = '';
+                }
+
+                const getpaimings = () => {
+                    $.ajax({
+                        url: 'https://app3558.acapp.acwing.com.cn/a/paoku/get10/',
+                        type: 'get',
+                        success(resp) {
+                            if(resp.error_message === 'success') {
+                                paimings.value = resp.paimings;
+                            }
+                        }
+                    })
+                }
+                getpaimings();
+
+
+                return {
+                    username,
+                    password,
+                    yanzhengmaurl,
+                    yanzhengma,
+                    login,
+                    iflogin,
+                    error_message,
+                    tuilogin,
+                    paimings
+                }
+            }
+                
+         })
+         app.mount('body');
+        
+    </script>
 </body>
 </html>
