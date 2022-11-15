@@ -924,7 +924,7 @@
                         }
                     });
                 }
-                getInfo();
+                if(localStorage.getItem('jwt_token'))getInfo();
 
                 const updateJifen = () => {
                     $.ajax({
@@ -947,7 +947,7 @@
                     $("*").css('animationPlayState', 'paused');
                     qcTime();
                     ifOut.value = true;
-                    updateJifen();
+                    if(iflogin.value)updateJifen();
                 }   
 
                 // const datab = getCurrentInstance();
