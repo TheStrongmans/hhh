@@ -90,7 +90,7 @@
             text-align: left; border-collapse: collapse;
         }
         .paihangbang td {
-            padding: 5px 20px 5px 5px;
+            padding: 5px 0 5px 5px;
         }
         .paihangbang img {
             width: 30px;
@@ -126,7 +126,7 @@
             <tr>
                 <th style="width:250px">用户</th>
                 <th style="width:50px">积分</th>
-                <th style="width:160px">时间</th>
+                <th style="width:180px">时间</th>
                 <th style="width:40px">排名</th>
             </tr>
             <tr v-for="(paiming,index) in paimings" :key="index">
@@ -134,7 +134,7 @@
                     <img :src="paiming.photo" alt=""> {{paiming.username}}
                 </td>
                 <td>{{paiming.jifen}}</td>
-                <td>{{paiming.time}}</td>
+                <td>{{paiming.date}}</td>
                 <td>{{index + 1}}</td>
             </tr>
         </table>
